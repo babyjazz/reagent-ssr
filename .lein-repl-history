@@ -1,0 +1,23 @@
+(do (require '[figwheel-sidecar.repl-api :as figwheel]) (figwheel/cljs-repl))
+(in-ns 'reagent-serverside.core)
+@items
+(ns reagent-serverside.core
+    (:require [reagent.core :as reagent :refer [atom]]
+              [reagent-serverside.home :refer [items home-page]]))
+(do (require '[figwheel-sidecar.repl-api :as figwheel]) (figwheel/cljs-repl))
+(in-ns 'reagent-serverside.core)
+@items
+(reset! items (range 10))
+(reset! items (1 2))
+(reset! items (range 2))
+(reset! items (range 5))
+(reset! items (range 2))
+(in-ns 'reagent-serverside.core)
+@ietms
+@items
+(in-ns 'reagent-serverside.core)
+@items
+(ns reagent-serverside.core
+    (:require [reagent.core :as reagent :refer [atom]]
+              [reagent-serverside.home :refer [items home-page]]))
+(do (require '[figwheel-sidecar.repl-api :as figwheel]) (figwheel/cljs-repl))

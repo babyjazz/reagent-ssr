@@ -6,5 +6,5 @@
   (reagent/render [home-page] (.getElementById js/document "app")))
 
 (defn init! []
-  (reset! items (range 10))
+  (reset! items (range 4))
   (mount-root))

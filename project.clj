@@ -22,7 +22,9 @@
 
   :plugins [[lein-environ "1.0.1"]
             [lein-cljsbuild "1.1.1"]
-            [lein-asset-minifier "0.2.2"]]
+            [lein-asset-minifier "0.2.2"]
+            [lein-ring "0.12.5"]]
+
 
   :ring {:handler reagent-serverside.handler/app
          :uberwar-name "reagent-serverside.war"}
