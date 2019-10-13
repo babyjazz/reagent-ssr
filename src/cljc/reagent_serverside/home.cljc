@@ -22,5 +22,6 @@
   [:div
    [:h2 "Welcome to reagent-serverside babyjazz"]
    [:h3 @a]
+   [:a {:href "/about"} "go to about"]
    [add-item-button items]
    [item-list @items]])

@@ -7,7 +7,8 @@
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
             [environ.core :refer [env]]
-            [reagent-serverside.home :refer [items home-page]]))
+            [reagent-serverside.home :refer [items home-page]]
+            [reagent-serverside.about :refer [about-page]]))
 
 (defn react-id-str [react-id]
   (assert (vector? react-id))
@@ -25,31 +26,28 @@
   ([component] (render [0] component))
   ([id component]
    (cond
-    (fn? component)
-    (render (component))
+     (fn? component)
+     (render (component))
 
-    (not (coll? component))
-    component
+     (not (coll? component))
+     component
 
-    (coll? (first component))
-    (map-indexed #(render (conj id %1) %2) component)
+     (coll? (first component))
+     (map-indexed #(render (conj id %1) %2) component)
 
-    (keyword? (first component))
-    (let [[tag opts & body] (normalize component)]
-      (->> body
-           (map-indexed #(render (conj id %1) %2))
-           (into [tag opts])
-           (set-react-id id)))
+     (keyword? (first component))
+     (let [[tag opts & body] (normalize component)]
+       (->> body
+            (map-indexed #(render (conj id %1) %2))
+            (into [tag opts])
+            (set-react-id id)))
 
-    (fn? (first component))
-    (render id (apply (first component) (rest component))))))
+     (fn? (first component))
+     (render id (apply (first component) (rest component))))))
 
 (reset! items (range 10))
 
-(def mount-target
-  [:div#app (render home-page)])
-
-(def loading-page
+(defn loading-page [page]
   (html
    [:html
     [:head
@@ -58,13 +56,14 @@
              :content "width=device-width, initial-scale=1"}]
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
-     mount-target
+     [:div#app]
+     [:div#data (render about-page)]
      (include-js "js/app.js")]]))
 
 
 (defroutes routes
-  (GET "/" [] loading-page)
-  (GET "/about" [] loading-page)
+  (GET "/" [] (loading-page home-page))
+  (GET "/about" [] (loading-page about-page))
 
   (resources "/")
   (not-found "Not Found"))
