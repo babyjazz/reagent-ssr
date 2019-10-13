@@ -10,6 +10,7 @@
             [reagent-serverside.home :refer [home-page]]
             [reagent-serverside.about :refer [about-page]]))
 
+
 (defn react-id-str [react-id]
   (assert (vector? react-id))
   (str "." (clojure.string/join "." react-id)))
@@ -45,18 +46,21 @@
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
 
-(defn loading-page [page]
-  (html
-   [:html
-    [:head
-     [:meta {:charset "utf-8"}]
-     [:meta {:name "viewport"
-             :content "width=device-width, initial-scale=1"}]
-     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
-    [:body
-     [:div#app]
-     [:div#data (render page)]
-     (include-js "js/app.js")]]))
+(defn loading-page [page-fn]
+  (let [{:keys [status headers body error] :as resp} ((get (page-fn) :init))]
+    (println "Async HTTP POST: " status)
+    (println "BODY" body)
+    (html
+     [:html
+      [:head
+       [:meta {:charset "utf-8"}]
+       [:meta {:name "viewport"
+               :content "width=device-width, initial-scale=1"}]
+       (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
+      [:body
+       [:div#app]
+       [:div#data (if-not error body)]
+       (include-js "js/app.js")]])))
 
 
 (defroutes routes

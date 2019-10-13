@@ -21,3 +21,20 @@
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent-serverside.home :refer [items home-page]]))
 (do (require '[figwheel-sidecar.repl-api :as figwheel]) (figwheel/cljs-repl))
+(ns reagent-serverside.handler
+  (:require [compojure.core :refer [GET defroutes]]
+            [compojure.route :refer [not-found resources]]
+            [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+            [hiccup.core :refer [html]]
+            [hiccup.page :refer [include-js include-css]]
+            [prone.middleware :refer [wrap-exceptions]]
+            [ring.middleware.reload :refer [wrap-reload]]
+            [environ.core :refer [env]]
+            [reagent-serverside.home :refer [home-page]]
+            [reagent-serverside.about :refer [about-page]]))
+(in-ns 'reagent-serverside.handler)
+@data-api-agent
+(in-ns 'reagent-serverside.about)
+@data
+(def data (atom  1))
+@data

@@ -8,8 +8,8 @@
                  [ring-server "0.4.0"]
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.13"]
-                 [cljs-ajax "0.8.0"]
                  [reagent-utils "0.1.5"]
+                 [http-kit "2.3.0"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [prone "0.8.2"]
@@ -18,8 +18,7 @@
                  [environ "1.0.1"]
                  [org.clojure/clojurescript "1.7.170" :scope "provided"]
                  [secretary "1.2.3"]
-                 [venantius/accountant "0.1.5"]
-                 ]
+                 [venantius/accountant "0.1.5"]]
 
   :plugins [[lein-environ "1.0.1"]
             [lein-cljsbuild "1.1.1"]
@@ -45,7 +44,7 @@
 
   :minify-assets
   {:assets
-    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+   {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs" "src/cljc"]
                              :compiler {:output-to "target/cljsbuild/public/js/app.js"
@@ -61,12 +60,11 @@
                                   [lein-figwheel "0.5.0"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [com.cemerick/piggieback "0.1.5"]
-                                  
+
                                   [pjstadig/humane-test-output "0.7.0"]]
 
                    :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.5.0"]
-                             ]
+                   :plugins [[lein-figwheel "0.5.0"]]
 
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]
@@ -74,8 +72,7 @@
                    :figwheel {:http-server-root "public"
                               :server-port 3449
                               :nrepl-port 7002
-                              :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"
-                                                 ]
+                              :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
                               :css-dirs ["resources/public/css"]
                               :ring-handler reagent-serverside.handler/app}
 
@@ -83,12 +80,7 @@
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
                                               :compiler {:main "reagent-serverside.dev"
-                                                         :source-map true}}
-
-
-                                        }
-
-                               }}
+                                                         :source-map true}}}}}
 
              :uberjar {:hooks [minify-assets.plugin/hooks]
                        :prep-tasks ["compile" ["cljsbuild" "once"]]
@@ -97,7 +89,7 @@
                        :omit-source true
                        :cljsbuild {:jar true
                                    :builds {:app
-                                             {:source-paths ["env/prod/cljs"]
-                                              :compiler
-                                              {:optimizations :advanced
-                                               :pretty-print false}}}}}})
+                                            {:source-paths ["env/prod/cljs"]
+                                             :compiler
+                                             {:optimizations :advanced
+                                              :pretty-print false}}}}}})
