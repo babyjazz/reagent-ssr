@@ -639,3 +639,103 @@ notifying browser that file changed:  out/reagent_serverside/core.js
 [0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
 notifying browser that file changed:  out/reagent_serverside/core.js
 [32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.212 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/about.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.276 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/about.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.223 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.247 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.237 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.218 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mANALYSIS ERROR: Referred var reagent-serverside.pages.about/about-page does not exist on file null, line null, column null
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.111 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.276 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.228 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mANALYSIS ERROR: No such namespace: reagent-serverside.pages.pages.home, could not locate reagent_serverside/pages/pages/home.cljs, reagent_serverside/pages/pages/home.cljc, or Closure namespace "reagent-serverside.pages.pages.home" on file null, line null, column null
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.17 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.171 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.201 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/core.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.291 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.84 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.371 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.318 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.339 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+[31mCompiling "target/cljsbuild/public/js/app.js" failed.
+[0mclojure.lang.ExceptionInfo: Library name must be specified as a symbol in :require / :require-macros; offending spec: [(quote clojure.walk)] at line 1 src/cljs/reagent_serverside/pages/home.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:568)
+    cljs.analyzer$error.invoke (analyzer.cljc:566)
+    cljs.analyzer$basic_validate_ns_spec.invoke (analyzer.cljc:1693)
+    cljs.analyzer$parse_require_spec.invoke (analyzer.cljc:1739)
+    clojure.lang.AFn.applyToHelper (AFn.java:171)
+    clojure.lang.AFn.applyTo (AFn.java:144)
+    clojure.core$apply.invoke (core.clj:636)
+    clojure.core$partial$fn__4533.doInvoke (core.clj:2512)
+    clojure.lang.RestFn.invoke (RestFn.java:408)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.Cons.next (Cons.java:39)
+    clojure.lang.RT.next (RT.java:674)
+    clojure.core/next (core.clj:64)
+    clojure.core$reduce1.invoke (core.clj:909)
+    clojure.core$reduce1.invoke (core.clj:900)
+    clojure.core$merge_with.doInvoke (core.clj:2936)
+    clojure.lang.RestFn.applyTo (RestFn.java:139)
+    clojure.core$apply.invoke (core.clj:634)
+    cljs.analyzer$eval1651$fn__1653$fn__1658.invoke (analyzer.cljc:1926)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1651$fn__1653.invoke (analyzer.cljc:1909)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.034 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.312 seconds.[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ("src/cljs" "src/cljc" "env/dev/cljs")...
+notifying browser that file changed:  out/reagent_serverside/pages/home.js
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.316 seconds.[0m

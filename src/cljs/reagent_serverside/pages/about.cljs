@@ -1,4 +1,4 @@
-(ns reagent-serverside.about)
+(ns reagent-serverside.pages.about)
 
 (defn about-page []
   [:div

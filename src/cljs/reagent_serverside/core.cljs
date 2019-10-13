@@ -1,7 +1,7 @@
 (ns reagent-serverside.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [reagent-serverside.home :refer [home-page]]
-            [reagent-serverside.about :refer [about-page]]))
+            [reagent-serverside.pages.home :refer [home-page]]
+            [reagent-serverside.pages.about :refer [about-page]]))
 
 (def page (atom [home-page]))
 

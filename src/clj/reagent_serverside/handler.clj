@@ -7,7 +7,7 @@
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
             [environ.core :refer [env]]
-            [reagent-serverside.home :refer [items home-page]]
+            [reagent-serverside.home :refer [home-page]]
             [reagent-serverside.about :refer [about-page]]))
 
 (defn react-id-str [react-id]
@@ -45,8 +45,6 @@
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
 
-(reset! items (range 10))
-
 (defn loading-page [page]
   (html
    [:html
@@ -57,7 +55,7 @@
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
      [:div#app]
-     [:div#data (render about-page)]
+     [:div#data (render page)]
      (include-js "js/app.js")]]))
 
 

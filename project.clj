@@ -8,6 +8,7 @@
                  [ring-server "0.4.0"]
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.13"]
+                 [cljs-ajax "0.8.0"]
                  [reagent-utils "0.1.5"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
