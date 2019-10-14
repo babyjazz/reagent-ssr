@@ -1,7 +1,6 @@
 (ns reagent-serverside.about
   #?(:cljs
-     (:require [reagent.core :as reagent :refer [atom]]
-               [ajax.core :refer [GET]]))
+     (:require [reagent.core :as reagent :refer [atom]]))
   #?(:clj
      (:require [org.httpkit.client :as http])))
 

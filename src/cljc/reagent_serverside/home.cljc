@@ -1,7 +1,6 @@
 (ns reagent-serverside.home
   #?(:cljs
-     (:require [reagent.core :as reagent :refer [atom]]
-               [ajax.core :refer [GET]]))
+     (:require [reagent.core :as reagent :refer [atom]]))
   #?(:clj
      (:require [org.httpkit.client :as http])))
 
@@ -17,6 +16,6 @@
                 resp))
            #?(:cljs
               (js/fetch "https://reqres.in/api/users?delay=5"
-                {:finally (fn [res]
-                            (prn (str "res: ")))})))
+                        {:finally (fn [res]
+                                    (prn (str "res: ")))})))
    :render #(str @a)})
