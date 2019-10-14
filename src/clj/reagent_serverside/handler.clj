@@ -46,8 +46,8 @@
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
 
-(defn loading-page [page-fn]
-  (let [{:keys [status headers body error] :as resp} ((get (page-fn) :init))]
+(defn loading-page [initial-page]
+  (let [{:keys [status headers body error] :as resp} (initial-page)]
     (println "Async HTTP POST: " status)
     (println "BODY" body)
     (html

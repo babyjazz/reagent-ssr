@@ -1,2 +1,6 @@
 /target
 .repl
+
+.lein-repl-history
+
+figwheel_server.log
