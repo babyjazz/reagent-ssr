@@ -1,7 +1,6 @@
 (ns reagent-serverside.utils.fetch
   #?(:cljs
-     (:require [reagent.core :as reagent :refer [atom]]
-               [clojure.walk :refer [keywordize-keys]]))
+     (:require [clojure.walk :refer [keywordize-keys]]))
   #?(:clj
      (:require [org.httpkit.client :as http]
                [clojure.data.json :as json]

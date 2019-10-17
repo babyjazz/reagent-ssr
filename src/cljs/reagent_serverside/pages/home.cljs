@@ -3,10 +3,17 @@
             [reagent-serverside.utils.fetch :refer [fetch]]))
 
 (defn home-page []
-  [:div
-   [:h1 (str "home")]
-   [:a {:href "/about"} "go to about"]
-   [:button {:on-click #(fetch "http://localhost:5000/post"
-                               {:method "post"
-                                :body {:name "babyjazz only"}})}
-    "fetch api"]])
+  (r/create-class
+   {:component-did-mount
+    #(fetch "http://localhost:5000/post"
+            {:method "post"
+             :body {:name "babyjazz only"}})
+    :reagent-render
+    (fn []
+      [:div
+       [:h1 (str "home")]
+       [:a {:href "/about"} "go to about"]
+       [:button {:on-click #(fetch "http://localhost:5000/post"
+                                   {:method "post"
+                                    :body {:name "babyjazz only"}})}
+        "fetch api"]])}))
