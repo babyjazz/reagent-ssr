@@ -1,6 +1,7 @@
 (ns reagent-serverside.utils.fetch
   #?(:cljs
-     (:require [reagent.core :as reagent :refer [atom]]))
+     (:require [reagent.core :as reagent :refer [atom]]
+               [clojure.walk :refer [keywordize-keys]]))
   #?(:clj
      (:require [org.httpkit.client :as http]
                [clojure.data.json :as json])))
@@ -15,7 +16,6 @@
   #?(:clj
      (let [resp @(http/request {:url url
                                 :method (get method-map (get options :method))
-                                :headers {"Content-Type" "application/json"}
                                 :body   (let [body (get options :body)]
                                           (when-not (nil? body)
                                             (when (map? body)
@@ -23,4 +23,20 @@
                                 :insecure? true})]
        (let [{:keys [status headers body error]} resp]
          (let [body (json/read-str body)]
-           (get body "data"))))))
+           (get body "data")))))
+  #?(:cljs
+     (-> (js/fetch url (clj->js {:method (get options :method)
+                                 :body (let [body (get options :body)]
+                                         (when-not (nil? body)
+                                           (JSON.stringify (clj->js (get options :body)))))
+                                 :headers {"Content-Type" "application/json"}}))
+         (.then (fn [resp]
+                  (.json resp)))
+         (.then (fn [resp]
+                   (let [resp (keywordize-keys (js->clj resp))]
+                     (prn resp)
+                     resp)))
+         (.catch (fn [err]
+                   (let [err (keywordize-keys (js->clj err))]
+                     (prn err)
+                     err))))))

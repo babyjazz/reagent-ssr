@@ -60,7 +60,6 @@
        [:div#data (str data)]
        (include-js "js/app.js")]])))
 
-
 (defroutes routes
   (GET "/" [] (loading-page home-page))
   (GET "/about" [] (loading-page about-page))
