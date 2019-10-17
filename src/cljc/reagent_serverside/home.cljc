@@ -2,6 +2,6 @@
   (:require [reagent-serverside.utils.fetch :refer [fetch]]))
 
 (defn home-page []
-  (fetch "https://a425b464.ngrok.io/post"
+  (fetch "https://156165fc.ngrok.io/post"
          {:method "post"
-          :body {:key "Y"}}))
+          :body {:name "babyjazz only"}}))

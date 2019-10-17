@@ -47,9 +47,7 @@
      (render id (apply (first component) (rest component))))))
 
 (defn loading-page [initial-page]
-  (let [{:keys [status headers body error] :as resp} (initial-page)]
-    (println "Async HTTP POST: " status)
-    (println "BODY" body)
+  (let [data (initial-page)]
     (html
      [:html
       [:head
@@ -59,7 +57,7 @@
        (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
       [:body
        [:div#app]
-       [:div#data (if-not error body)]
+       [:div#data (str data)]
        (include-js "js/app.js")]])))
 
 
