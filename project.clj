@@ -4,11 +4,12 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.10.0"]
                  [ring-server "0.4.0"]
-                 [reagent "0.5.1"]
+                 [org.clojure/core.async  "0.4.500"]
+                 [reagent "0.8.1"]
                  [reagent-forms "0.5.13"]
-                 [reagent-utils "0.1.5"]
+                 [reagent-utils "0.3.3"]
                  [http-kit "2.3.0"]
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
@@ -17,15 +18,21 @@
                  [compojure "1.4.0"]
                  [hiccup "1.0.5"]
                  [environ "1.0.1"]
-                 [org.clojure/clojurescript "1.7.170" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [secretary "1.2.3"]
                  [venantius/accountant "0.1.5"]]
 
   :plugins [[lein-environ "1.0.1"]
-            [lein-cljsbuild "1.1.1"]
+            [lein-cljsbuild "1.1.7"]
             [lein-asset-minifier "0.2.2"]
+            [lein-npm "0.6.2"]
             [lein-ring "0.12.5"]]
 
+  :npm {:package {:scripts {:build "webpack -p"}}
+        :dependencies [["@cljs-oss/module-deps" "1.1.1"]
+                       [browserify "15.1.0"]
+                       [webpack "4.8.3"]]
+        :devDependencies [[webpack-cli "3.0.3"]]}
 
   :ring {:handler reagent-serverside.handler/app
          :uberwar-name "reagent-serverside.war"}
@@ -52,20 +59,26 @@
                                         :output-dir "target/cljsbuild/public/js/out"
                                         :asset-path   "js/out"
                                         :optimizations :none
+                                        :process-shim true
+                                        :foreign-libs [{:file "resources/public/js/npm-deps.js"
+                                                        :provides [;"moment" ; global-export name
+                                                                   ]
+                                                        :global-exports {;momen Moment ; name-to-export name-from-npm-deps
+                                                                         }}]
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns reagent-serverside.repl}
 
                    :dependencies [[ring/ring-mock "0.3.0"]
                                   [ring/ring-devel "1.4.0"]
-                                  [lein-figwheel "0.5.0"]
+                                  [lein-figwheel "0.5.19"]
+                                  [figwheel-sidecar "0.5.19"]
                                   [org.clojure/tools.nrepl "0.2.12"]
                                   [com.cemerick/piggieback "0.1.5"]
-
                                   [pjstadig/humane-test-output "0.7.0"]]
 
                    :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.5.0"]]
+                   :plugins [[lein-figwheel "0.5.19"]]
 
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]

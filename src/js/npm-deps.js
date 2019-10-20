@@ -1,0 +1,1 @@
+// window.Resizable = require('re-resizable');

@@ -6,3 +6,6 @@
 figwheel_server.log
 
 .lein-env
+
+/node_modules
+.rebel_readline_history
