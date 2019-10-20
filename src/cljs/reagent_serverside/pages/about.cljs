@@ -1,6 +1,7 @@
-(ns reagent-serverside.pages.about)
+(ns reagent-serverside.pages.about
+  (:require [accountant.core :as route]))
 
 (defn about-page []
-  [:div
+  [:<>
    [:h1 "about"]
-   [:a {:href "/"} "go to home"]])
+   [:button {:on-click #(route/navigate! "/")} "go to home"]])

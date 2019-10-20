@@ -1,18 +1,25 @@
 (ns reagent-serverside.pages.home
   (:require [reagent.core :as r :refer [atom]]
-            [reagent-serverside.utils.fetch :refer [fetch]]))
+            [reagent-serverside.utils.fetch :refer [fetch]]
+            [accountant.core :as route]))
+
+(def a (atom 1))
+(defonce mounted (atom false))
 
 (defn home-page []
   (r/create-class
    {:component-did-mount
-    #(fetch "http://localhost:5000/post"
-            {:method "post"
-             :body {:name "babyjazz only"}})
+    (fn []
+      (when (= @mounted false)
+        (fetch "http://localhost:5000/post"
+               {:method "post"
+                :body {:name "first init"}})
+        (swap! mounted (fn [_] true))))
     :reagent-render
     (fn []
-      [:div
-       [:h1 (str "home")]
-       [:a {:href "/about"} "go to about"]
+      [:<>
+       [:h1 (str "home" @a)]
+       [:button {:on-click #(route/navigate! "/about")} "go to about"]
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
                                     :body {:name "babyjazz only"}})}

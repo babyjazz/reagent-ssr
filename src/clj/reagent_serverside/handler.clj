@@ -57,7 +57,7 @@
        (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
       [:body
        [:div#app]
-       [:div#data (str data)]
+       [:script#data (str data)]
        (include-js "js/app.js")]])))
 
 (defroutes routes

@@ -1,20 +1,42 @@
 (ns reagent-serverside.core
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as r :refer [atom]]
             [reagent-serverside.pages.home :refer [home-page]]
-            [reagent-serverside.pages.about :refer [about-page]]))
+            [reagent-serverside.pages.about :refer [about-page]]
+            [secretary.core :as secretary :include-macros true]
+            [accountant.core :as route]
+            [goog.events :as events]
+            [goog.history.EventType :as HistoryEventType])
+  (:import goog.History))
 
-(def page (atom [home-page]))
+(defonce selected-page (r/atom home-page))
 
-(if (= js/window.location.pathname "/about")
-  (do
-    (js/console.log "ABOUTTTTTT")
-    (swap! page (fn [_] [about-page])))
-  (do
-    (js/console.log "HOMEEE")
-    (swap! page (fn [_] [home-page]))))
+(defn page []
+  [@selected-page])
+
+(secretary/defroute "/" []
+  (reset! selected-page home-page))
+
+(secretary/defroute "/about" []
+  (reset! selected-page about-page))
+
+(defn hook-browser-navigation! []
+  (doto (History.)
+    (events/listen
+     HistoryEventType/NAVIGATE
+     (fn [event]
+       (secretary/dispatch! (.-token event))))
+    (.setEnabled true)))
 
 (defn mount-root []
-  (reagent/render @page (.getElementById js/document "app")))
+  (r/render [page] (.getElementById js/document "app")))
 
 (defn init! []
+  (route/configure-navigation!
+   {:nav-handler
+    (fn [path]
+      (secretary/dispatch! path))
+    :path-exists?
+    (fn [path]
+      (secretary/locate-route path))})
+  (route/dispatch-current!)
   (mount-root))

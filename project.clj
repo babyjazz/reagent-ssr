@@ -20,7 +20,7 @@
                  [environ "1.0.1"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [secretary "1.2.3"]
-                 [venantius/accountant "0.1.5"]]
+                 [venantius/accountant "0.2.5"]]
 
   :plugins [[lein-environ "1.0.1"]
             [lein-cljsbuild "1.1.7"]
@@ -61,10 +61,9 @@
                                         :optimizations :none
                                         :process-shim true
                                         :foreign-libs [{:file "resources/public/js/npm-deps.js"
-                                                        :provides [;"moment" ; global-export name
-                                                                   ]
-                                                        :global-exports {;momen Moment ; name-to-export name-from-npm-deps
-                                                                         }}]
+                                                        :provides [];["moment"] ; global-export name
+                                                        :global-exports {}}] ; [momen Moment] ; name-to-export name-from-npm-deps
+                                                                         
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns reagent-serverside.repl}
