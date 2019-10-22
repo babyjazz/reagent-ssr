@@ -1,7 +1,8 @@
 (ns reagent-serverside.pages.home
   (:require [reagent.core :as r :refer [atom]]
             [reagent-serverside.utils.fetch :refer [fetch]]
-            [accountant.core :as route]))
+            [accountant.core :as route]
+            [reagent-serverside.home :as h]))
 
 (def a (atom 1))
 
@@ -9,9 +10,7 @@
   (r/create-class
    {:component-did-mount
     (fn []
-      (fetch "http://localhost:5000/post"
-             {:method "post"
-              :body {:name "home cljs"}}))
+      (h/home-page))
     :reagent-render
     (fn []
       [:<>

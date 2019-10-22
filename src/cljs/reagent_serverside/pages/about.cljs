@@ -1,15 +1,14 @@
 (ns reagent-serverside.pages.about
   (:require [accountant.core :as route]
             [reagent.core :as r :refer [atom]]
-            [reagent-serverside.utils.fetch :refer [fetch]]))
+            [reagent-serverside.about :as a]))
 
 (defn about-page []
   (r/create-class
    {:component-did-mount
     (fn []
-      (fetch "http://localhost:5000/post"
-             {:method "post"
-              :body {:name "about cljs"}}))
+      (a/about-page)
+      (prn "about"))
     :reagent-render
     (fn []
       [:<>
