@@ -26,18 +26,21 @@
               (let [body (keywordize-keys (json/read-str body))]
                 (get body :data)))))
   #?(:cljs
-     (-> (js/fetch url (clj->js {:method (get options :method)
-                                 :body (let [body (get options :body)]
-                                         (when-not (nil? body)
-                                           (JSON.stringify (clj->js (get options :body)))))
-                                 :headers {"Content-Type" "application/json"}}))
-         (.then (fn [resp]
-                  (.json resp)))
-         (.then (fn [resp]
-                  (let [resp (keywordize-keys (js->clj resp))]
-                    (prn resp)
-                    resp)))
-         (.catch (fn [err]
-                   (let [err (keywordize-keys (js->clj err))]
-                     (prn err)
-                     err))))))
+     (let [mount (.-innerText (.getElementById js/document "mount"))]
+       (if (empty? mount)
+         (-> (js/fetch url (clj->js {:method (get options :method)
+                                     :body (let [body (get options :body)]
+                                             (when-not (nil? body)
+                                               (JSON.stringify (clj->js (get options :body)))))
+                                     :headers {"Content-Type" "application/json"}}))
+             (.then (fn [resp]
+                      (.json resp)))
+             (.then (fn [resp]
+                      (let [resp (keywordize-keys (js->clj resp))]
+                        (prn resp)
+                        resp)))
+             (.catch (fn [err]
+                       (let [err (keywordize-keys (js->clj err))]
+                         (prn err)
+                         err))))
+         (set! (.-innerText (.getElementById js/document "mount")) "")))))

@@ -1,7 +1,17 @@
 (ns reagent-serverside.pages.about
-  (:require [accountant.core :as route]))
+  (:require [accountant.core :as route]
+            [reagent.core :as r :refer [atom]]
+            [reagent-serverside.utils.fetch :refer [fetch]]))
 
 (defn about-page []
-  [:<>
-   [:h1 "about"]
-   [:button {:on-click #(route/navigate! "/")} "go to home"]])
+  (r/create-class
+   {:component-did-mount
+    (fn []
+      (fetch "http://localhost:5000/post"
+             {:method "post"
+              :body {:name "about cljs"}}))
+    :reagent-render
+    (fn []
+      [:<>
+       [:h1 "about"]
+       [:button {:on-click #(route/navigate! "/")} "go to home"]])}))

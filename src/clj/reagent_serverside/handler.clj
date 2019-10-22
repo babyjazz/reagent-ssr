@@ -46,7 +46,7 @@
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
 
-(defn loading-page [initial-page]
+(defn loading-page [path initial-page]
   (let [data (initial-page)]
     (html
      [:html
@@ -58,11 +58,12 @@
       [:body
        [:div#app]
        [:script#data (str data)]
+       [:div#mount (when-not (nil? data) "mounted")]
        (include-js "js/app.js")]])))
 
 (defroutes routes
-  (GET "/" [] (loading-page home-page))
-  (GET "/about" [] (loading-page about-page))
+  (GET "/" [] (loading-page "/" home-page))
+  (GET "/about" [] (loading-page "/about" about-page))
 
   (resources "/")
   (not-found "Not Found"))

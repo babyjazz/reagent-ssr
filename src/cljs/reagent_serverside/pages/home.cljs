@@ -4,17 +4,14 @@
             [accountant.core :as route]))
 
 (def a (atom 1))
-(defonce mounted (atom false))
 
 (defn home-page []
   (r/create-class
    {:component-did-mount
     (fn []
-      (when (= @mounted false)
-        (fetch "http://localhost:5000/post"
-               {:method "post"
-                :body {:name "first init"}})
-        (swap! mounted (fn [_] true))))
+      (fetch "http://localhost:5000/post"
+             {:method "post"
+              :body {:name "home cljs"}}))
     :reagent-render
     (fn []
       [:<>
