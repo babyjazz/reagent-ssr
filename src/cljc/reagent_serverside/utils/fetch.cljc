@@ -23,8 +23,9 @@
                                               (json/write-str (get options :body)))))
                                 :insecure? true})]
             (let [{:keys [body status error]} resp]
-              (let [body (keywordize-keys (json/read-str body))]
-                (get body :data)))))
+              (if-not error
+                (let [body (keywordize-keys (json/read-str body))]
+                  (get body :data))))))
   #?(:cljs
      (let [mount (.-innerText (.getElementById js/document "mount"))]
        (if (empty? mount)
