@@ -2,21 +2,18 @@
   (:require [reagent.core :as r :refer [atom]]
             [reagent-serverside.utils.fetch :refer [fetch]]
             [accountant.core :as route]
-            [reagent-serverside.home :as h]))
-
-(def a (atom 1))
+            [reagent-serverside.home :as home]))
 
 (defn home-page []
   (r/create-class
    {:component-did-mount
     (fn []
-      (h/home-page))
+      (home/initial-data))
     :reagent-render
     (fn []
       [:<>
-       [:h1 (str "home" @a)]
+       [:h1 (str "homes")]
        [:button {:on-click #(route/navigate! "/about")} "go to about"]
-       [:button {:on-click #(fetch "http://localhost:5000/post"
-                                   {:method "post"
-                                    :body {:name "babyjazz only"}})}
+       [:button {:on-click #(fetch "http://localhost:5000/post/some message"
+                                   {:method "get"})}
         "fetch api"]])}))

@@ -32,7 +32,7 @@
          (-> (js/fetch url (clj->js {:method (get options :method)
                                      :body (let [body (get options :body)]
                                              (when-not (nil? body)
-                                               (JSON.stringify (clj->js (get options :body)))))
+                                               (js/JSON.stringify (clj->js (get options :body)))))
                                      :headers {"Content-Type" "application/json"}}))
              (.then (fn [resp]
                       (.json resp)))

@@ -7,8 +7,8 @@
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
             [environ.core :refer [env]]
-            [reagent-serverside.home :refer [home-page]]
-            [reagent-serverside.about :refer [about-page]]))
+            [reagent-serverside.home :as home]
+            [reagent-serverside.about :as about]))
 
 
 (defn react-id-str [react-id]
@@ -62,8 +62,8 @@
        (include-js "js/app.js")]])))
 
 (defroutes routes
-  (GET "/" [] (loading-page home-page))
-  (GET "/about" [] (loading-page about-page))
+  (GET "/" [] (loading-page home/initial-data))
+  (GET "/about" [] (loading-page about/initial-data))
 
   (resources "/")
   (not-found "Not Found"))
