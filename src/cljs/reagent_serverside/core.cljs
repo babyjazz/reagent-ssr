@@ -40,5 +40,6 @@
     :path-exists?
     (fn [path]
       (secretary/locate-route path))})
-  (route/dispatch-current!)
+  (when-not js/goog.DEBUG
+    (route/dispatch-current!))
   (mount-root))
