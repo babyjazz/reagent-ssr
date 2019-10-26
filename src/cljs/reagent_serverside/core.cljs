@@ -8,9 +8,11 @@
             [goog.history.EventType :as HistoryEventType])
   (:import goog.History))
 
-(defonce selected-page (r/atom home-page))
+(def selected-page (atom home-page))
 
 (defn page []
+  (when js/goog.DEBUG
+    (route/dispatch-current!))
   [@selected-page])
 
 (secretary/defroute "/" []
