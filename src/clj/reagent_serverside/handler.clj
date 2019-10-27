@@ -1,14 +1,11 @@
 (ns reagent-serverside.handler
-  (:require [compojure.core :refer [GET defroutes context]]
-            [compojure.route :refer [not-found resources]]
-            [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
-            [hiccup.core :refer [html]]
-            [hiccup.page :refer [include-js include-css]]
-            [prone.middleware :refer [wrap-exceptions]]
-            [ring.middleware.reload :refer [wrap-reload]]
-            [environ.core :refer [env]]
-            [reagent-serverside.home :as home]
-            [reagent-serverside.about :as about]))
+  (:require
+   [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+   [hiccup.page :refer [include-js include-css]]
+   [prone.middleware :refer [wrap-exceptions]]
+   [ring.middleware.reload :refer [wrap-reload]]
+   [environ.core :refer [env]]
+   [reagent-serverside.router.router :refer [routes]]))
 
 
 (defn react-id-str [react-id]
@@ -29,47 +26,18 @@
    (cond
      (fn? component)
      (render (component))
-
      (not (coll? component))
      component
-
      (coll? (first component))
      (map-indexed #(render (conj id %1) %2) component)
-
      (keyword? (first component))
      (let [[tag opts & body] (normalize component)]
        (->> body
             (map-indexed #(render (conj id %1) %2))
             (into [tag opts])
             (set-react-id id)))
-
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
-
-(defn loading-page [initial-page & [params]]
-  (let [data (initial-page params)]
-    (html
-     [:html
-      [:head
-       [:meta {:charset "utf-8"}]
-       [:meta {:name "viewport"
-               :content "width=device-width, initial-scale=1"}]
-       (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
-      [:body
-       [:div#app "loading"]
-       [:script#data (str data)]
-       [:div#mount (when-not (nil? data) "mounted")]
-       (include-js "/js/app.js")]])))
-
-(defroutes routes
-  (GET "/" [] (loading-page home/initial-data))
-  (GET "/about" [] (loading-page about/initial-data))
-  (GET "/about/:num" [num] (loading-page about/initial-data {:num num}))
-  (GET "/about/:num/:char" [num char] (loading-page about/initial-data {:num num :char char}))
-  (resources "/")
-  (resources "/about")
-  (resources "/about/:id")
-  (not-found "Not Found"))
 
 (def app
   (let [handler (wrap-defaults #'routes  site-defaults)]
