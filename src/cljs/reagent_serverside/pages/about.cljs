@@ -10,10 +10,11 @@
     (fn []
       (about/initial-data))
     :reagent-render
-    (fn [name]
+    (fn [params]
       [:<>
        [:h1 "about"]
-       [:p "url param: " name]
+       [:p "url param: " (get params :num)]
+       [:p "second url param: " (get params :char)]
        [:<>
         [:span "fetched data: "]
         [:span {:style {:font-size "0.8em"}} "switch branch to re-frame"]]
@@ -25,7 +26,8 @@
         "Add global state in fetch.cljc for get fetched data in this page"]
        [:hr]
        [:button {:on-click #(route/navigate! "/about/11")} "go to about param"]
+       [:button {:on-click #(route/navigate! "/about/11/12")} "go to about two param"]
        [:button {:on-click #(route/navigate! "/")} "go to home"]
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
-                                    :body {:name (or name 3)}})} "fetch post"]])}))
+                                    :body {:name 3}})} "fetch post"]])}))

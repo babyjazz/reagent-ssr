@@ -10,7 +10,7 @@
             [reagent.core :as reagent]))
 
 (def selected-page (reagent/atom {:page home-page
-                                  :params nil}))
+                                  :params {}}))
 
 (defn page []
   (when js/goog.DEBUG
@@ -26,11 +26,18 @@
     (.setEnabled true)))
 
 (defroute "/" []
-  (swap! selected-page assoc :params nil :page home-page))
+  (swap! selected-page (fn [] {:page home-page
+                                :params {}})))
 (defroute "/about" []
-  (swap! selected-page assoc :params nil :page about-page))
+  (swap! selected-page (fn [] {:page about-page
+                                :params {}})))
 (defroute #"/about/(\w+)" [num]
-  (swap! selected-page assoc :params num :page about-page))
+  (swap! selected-page (fn [] {:page about-page
+                                :params {:num num}})))
+(defroute #"/about/(\w+)/(\w+)" [num char]
+  (swap! selected-page (fn [] {:page about-page
+                                :params {:num num
+                                         :char char}})))
 
 (defn ^:export mount-root []
   (reagent/render [page]
