@@ -9,3 +9,5 @@ figwheel_server.log
 
 /node_modules
 .rebel_readline_history
+
+.nrepl-port

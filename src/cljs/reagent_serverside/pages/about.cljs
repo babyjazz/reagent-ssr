@@ -10,10 +10,22 @@
     (fn []
       (about/initial-data))
     :reagent-render
-    (fn []
+    (fn [name]
       [:<>
-       [:h1 "aboutss"]
+       [:h1 "about"]
+       [:p "url param: " name]
+       [:<>
+        [:span "fetched data: "]
+        [:span {:style {:font-size "0.8em"}} "switch branch to re-frame"]]
+       [:hr]
+       [:p {:style {:font-size "0.7em"}}
+        "This about page will get fetching data before js mount and fetch by url parameter. if no parameter, default body value to fetch is 3"]
+       [:hr]
+       [:p {:style {:font-size "0.7em"}}
+        "Add global state in fetch.cljc for get fetched data in this page"]
+       [:hr]
+       [:button {:on-click #(route/navigate! "/about/11")} "go to about param"]
        [:button {:on-click #(route/navigate! "/")} "go to home"]
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
-                                    :body {:name "bob bubble"}})} "fetch post"]])}))
+                                    :body {:name (or name 3)}})} "fetch post"]])}))

@@ -1,5 +1,5 @@
 (ns reagent-serverside.handler
-  (:require [compojure.core :refer [GET defroutes]]
+  (:require [compojure.core :refer [GET defroutes context]]
             [compojure.route :refer [not-found resources]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [hiccup.core :refer [html]]
@@ -46,8 +46,8 @@
      (fn? (first component))
      (render id (apply (first component) (rest component))))))
 
-(defn loading-page [initial-page]
-  (let [data (initial-page)]
+(defn loading-page [initial-page & [id]]
+  (let [data (initial-page id)]
     (html
      [:html
       [:head
@@ -56,18 +56,19 @@
                :content "width=device-width, initial-scale=1"}]
        (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
       [:body
-       [:div#app]
+       [:div#app "loading"]
        [:script#data (str data)]
        [:div#mount (when-not (nil? data) "mounted")]
-       (include-js "js/app.js")]])))
+       (include-js "/js/app.js")]])))
 
 (defroutes routes
   (GET "/" [] (loading-page home/initial-data))
   (GET "/about" [] (loading-page about/initial-data))
-
+  (GET "/about/:id" [id] (loading-page about/initial-data id))
   (resources "/")
+  (resources "/about")
   (not-found "Not Found"))
 
 (def app
-  (let [handler (wrap-defaults #'routes site-defaults)]
+  (let [handler (wrap-defaults #'routes  site-defaults)]
     (if (env :dev) (-> handler wrap-exceptions wrap-reload) handler)))

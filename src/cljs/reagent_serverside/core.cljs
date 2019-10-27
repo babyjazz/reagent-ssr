@@ -1,39 +1,43 @@
 (ns reagent-serverside.core
-  (:require [reagent.core :as r :refer [atom]]
+  (:require-macros [secretary.core :refer [defroute]])
+  (:import goog.history.Html5History)
+  (:require [secretary.core :as secretary]
+            [goog.events :as events]
+            [accountant.core :as accountant]
             [reagent-serverside.pages.home :refer [home-page]]
             [reagent-serverside.pages.about :refer [about-page]]
-            [secretary.core :as secretary :include-macros true]
-            [accountant.core :as route]
-            [goog.events :as events]
-            [goog.history.EventType :as HistoryEventType])
-  (:import goog.History))
+            [goog.history.EventType :as EventType]
+            [reagent.core :as reagent]))
 
-(def selected-page (atom home-page))
+(def selected-page (reagent/atom {:page home-page
+                                  :params nil}))
 
 (defn page []
   (when js/goog.DEBUG
-    (route/dispatch-current!))
-  [@selected-page])
-
-(secretary/defroute "/" []
-  (reset! selected-page home-page))
-
-(secretary/defroute "/about" []
-  (reset! selected-page about-page))
+    (accountant/dispatch-current!))
+  [(@selected-page :page) (@selected-page :params)])
 
 (defn hook-browser-navigation! []
-  (doto (History.)
+  (doto (Html5History.)
     (events/listen
-     HistoryEventType/NAVIGATE
+     EventType/NAVIGATE
      (fn [event]
        (secretary/dispatch! (.-token event))))
     (.setEnabled true)))
 
-(defn mount-root []
-  (r/render [page] (.getElementById js/document "app")))
+(defroute "/" []
+  (swap! selected-page assoc :params nil :page home-page))
+(defroute "/about" []
+  (swap! selected-page assoc :params nil :page about-page))
+(defroute #"/about/(\w+)" [num]
+  (swap! selected-page assoc :params num :page about-page))
+
+(defn ^:export mount-root []
+  (reagent/render [page]
+                  (.getElementById js/document "app")))
 
 (defn init! []
-  (route/configure-navigation!
+  (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
       (secretary/dispatch! path))
@@ -41,5 +45,5 @@
     (fn [path]
       (secretary/locate-route path))})
   (when-not js/goog.DEBUG
-    (route/dispatch-current!))
+    (accountant/dispatch-current!))
   (mount-root))
