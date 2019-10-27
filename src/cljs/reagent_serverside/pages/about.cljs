@@ -30,4 +30,5 @@
        [:button {:on-click #(route/navigate! "/")} "go to home"]
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
-                                    :body {:name 3}})} "fetch post"]])}))
+                                    :body {:name (or (get params :char)
+                                                     (get params :num))}})} "fetch post"]])}))
