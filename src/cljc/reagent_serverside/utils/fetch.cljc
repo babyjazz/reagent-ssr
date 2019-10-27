@@ -33,7 +33,8 @@
                                      :body (let [body (get options :body)]
                                              (when-not (nil? body)
                                                (js/JSON.stringify (clj->js (get options :body)))))
-                                     :headers {"Content-Type" "application/json"}}))
+                                     :headers (merge {"Content-Type" "application/json"}
+                                                     (get options :headers))}))
              (.then (fn [resp]
                       (.json resp)))
              (.then (fn [resp]
