@@ -3,7 +3,7 @@
 
 (defn initial-data [& [params]]
   "NOTE: Data will be writen in HTML before javascript will mount"
-  (prn params)
   (fetch "http://localhost:5000/post"
          {:method "post"
-          :body {:id (or params 3)}}))
+          :body {:id (or (get params :char )
+                         (or (get params :num) 3))}}))

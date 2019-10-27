@@ -26,7 +26,7 @@
         "Add global state in fetch.cljc for get fetched data in this page"]
        [:hr]
        [:button {:on-click #(route/navigate! "/about/11")} "go to about param"]
-       [:button {:on-click #(route/navigate! "/about/11/12")} "go to about two param"]
+       [:button {:on-click #(route/navigate! "/about/11/message")} "go to about two param"]
        [:button {:on-click #(route/navigate! "/")} "go to home"]
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
