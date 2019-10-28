@@ -16,6 +16,8 @@
                  [prone "0.8.2"]
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.4.0"]
+                 [re-frame "0.10.5"]
+                 [day8.re-frame/re-frame-10x "0.4.1"]
                  [hiccup "1.0.5"]
                  [environ "1.0.1"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
@@ -60,10 +62,11 @@
                                         :asset-path   "js/out"
                                         :optimizations :none
                                         :process-shim true
+                                        :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}
+                                        :preloads [day8.re-frame-10x.preload]
                                         :foreign-libs [{:file "resources/public/js/npm-deps.js"
                                                         :provides [];["moment"] ; global-export name
                                                         :global-exports {}}] ; [momen Moment] ; name-to-export name-from-npm-deps
-                                                                         
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns reagent-serverside.repl}
