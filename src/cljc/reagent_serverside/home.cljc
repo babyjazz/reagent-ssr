@@ -3,5 +3,9 @@
 
 (defn initial-data [& [id]]
   "NOTE: Data will be writen in HTML before javascript will mount"
-  (fetch "http://localhost:5000/post/1"
-         {:method "get"}))
+  (fetch "http://localhost:5000/post"
+         {:method "post"
+          :body {:name "jonathan"
+                 :age 19
+                 :sex "man"}
+          :dispatch :user}))

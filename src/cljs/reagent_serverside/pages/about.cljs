@@ -31,4 +31,5 @@
        [:button {:on-click #(fetch "http://localhost:5000/post"
                                    {:method "post"
                                     :body {:name (or (get params :char)
-                                                     (get params :num))}})} "fetch post"]])}))
+                                                     (get params :num))}
+                                    :dispatch :my-id})} "fetch post"]])}))
