@@ -60,10 +60,9 @@
                                         :asset-path   "js/out"
                                         :optimizations :none
                                         :process-shim true
-                                        :foreign-libs [{:file "resources/public/js/npm-deps.js"
-                                                        :provides [];["moment"] ; global-export name
-                                                        :global-exports {}}] ; [momen Moment] ; name-to-export name-from-npm-deps
-                                                                         
+                                        :foreign-libs [{:file "resources/public/js/npm-deps.js"}]
+                                                        ; :provides ["moment"] ; example
+                                                        ; :global-exports {moment Moment}}] ; [momen Moment] ; name-to-export name-from-npm-deps
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns reagent-serverside.repl}
