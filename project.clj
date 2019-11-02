@@ -18,7 +18,6 @@
                  [compojure "1.4.0"]
                  [re-frame "0.10.5"]
                  [day8.re-frame/re-frame-10x "0.4.1"]
-                 [day8.re-frame/tracing "0.5.1"]
                  [hiccup "1.0.5"]
                  [environ "1.0.1"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
@@ -80,6 +79,7 @@
                                   [lein-figwheel "0.5.19"]
                                   [figwheel-sidecar "0.5.19"]
                                   [org.clojure/tools.nrepl "0.2.12"]
+                                  [day8.re-frame/tracing-stubs "0.5.1"]
                                   [com.cemerick/piggieback "0.1.5"]
                                   [pjstadig/humane-test-output "0.7.0"]]
 
