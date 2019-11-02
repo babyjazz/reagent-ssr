@@ -62,8 +62,7 @@
                                         :asset-path   "js/out"
                                         :optimizations :none
                                         :process-shim true
-                                        :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true
-                                                          "day8.re_frame.tracing.trace_enabled_QMARK_" true}
+                                        :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}
                                         :preloads [devtools.preload
                                                    day8.re-frame-10x.preload]
                                         :foreign-libs [{:file "resources/public/js/npm-deps.js"}]
@@ -79,7 +78,6 @@
                                   [lein-figwheel "0.5.19"]
                                   [figwheel-sidecar "0.5.19"]
                                   [org.clojure/tools.nrepl "0.2.12"]
-                                  [day8.re-frame/tracing-stubs "0.5.1"]
                                   [com.cemerick/piggieback "0.1.5"]
                                   [pjstadig/humane-test-output "0.7.0"]]
 
