@@ -7,7 +7,8 @@
             [re-frame.core :as rf]
             [reagent-serverside.reframe.store]
             [reagent-serverside.reframe.event]
-            [reagent-serverside.router.router :refer [selected-page]]
+            [reagent-serverside.router.router]
+            [reagent-serverside.pages.home :refer [home-page]]
             [goog.history.EventType :as EventType]))
 
 ; page renderer
@@ -18,7 +19,10 @@
   (r/create-class
    {:reagent-render
     (fn []
-      [(@selected-page :page) (@selected-page :params)])}))
+      (let [selected-page @(rf/subscribe [:router])]
+       (if-not (nil? selected-page)
+         [(:page selected-page)
+          (:params selected-page)])))}))
 
 ; page navigation history
 ; -------------------------------
