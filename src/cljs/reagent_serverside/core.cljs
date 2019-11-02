@@ -4,16 +4,25 @@
             [accountant.core :as accountant]
             [reagent.core :as r]
             [goog.events :as events]
-            [reagent-serverside.router.router :refer [selected-page]]
+            [re-frame.core :as rf]
+            [reagent-serverside.reframe.store]
+            [reagent-serverside.reframe.event]
+            [reagent-serverside.router.router]
+            [reagent-serverside.pages.home :refer [home-page]]
             [goog.history.EventType :as EventType]))
-
 
 ; page renderer
 ; -------------------------------
 (defn page []
   (when js/goog.DEBUG
     (accountant/dispatch-current!))
-  [(@selected-page :page) (@selected-page :params)])
+  (r/create-class
+   {:reagent-render
+    (fn []
+      (let [selected-page @(rf/subscribe [:router])]
+       (if-not (nil? selected-page)
+         [(:page selected-page)
+          (:params selected-page)])))}))
 
 ; page navigation history
 ; -------------------------------
@@ -28,6 +37,7 @@
 ; javascript mount
 ; -------------------------------
 (defn ^:export mount-root []
+  (rf/dispatch [:initialize])
   (r/render [page] (.getElementById js/document "app")))
 
 ; initial javascript

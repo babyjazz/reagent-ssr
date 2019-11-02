@@ -1,6 +1,8 @@
 (ns reagent-serverside.utils.fetch
   #?(:cljs
-     (:require [clojure.walk :refer [keywordize-keys]]))
+     (:require [clojure.walk :refer [keywordize-keys]]
+               [re-frame.core :as rf]
+               [reagent-serverside.utils.fetch-status :as status]))
   #?(:clj
      (:require [org.httpkit.client :as http]
                [clojure.data.json :as json]
@@ -11,6 +13,7 @@
                  "patch" :patch
                  "put" :put
                  "delete" :delete})
+
 
 (defn fetch [url options]
   #?(:clj (let [resp
@@ -29,20 +32,27 @@
   #?(:cljs
      (let [mount (.-innerText (.getElementById js/document "mount"))]
        (if (empty? mount)
-         (-> (js/fetch url (clj->js {:method (get options :method)
-                                     :body (let [body (get options :body)]
-                                             (when-not (nil? body)
-                                               (js/JSON.stringify (clj->js (get options :body)))))
-                                     :headers (merge {"Content-Type" "application/json"}
-                                                     (get options :headers))}))
-             (.then (fn [resp]
-                      (.json resp)))
-             (.then (fn [resp]
-                      (let [resp (keywordize-keys (js->clj resp))]
-                        (prn resp)
-                        resp)))
-             (.catch (fn [err]
-                       (let [err (keywordize-keys (js->clj err))]
-                         (prn err)
-                         err))))
-         (set! (.-innerText (.getElementById js/document "mount")) "")))))
+         (do
+           (rf/dispatch [:set-api {(get options :dispatch) {:status status/request}}])
+           (-> (js/fetch url (clj->js {:method (get options :method)
+                                       :body (let [body (get options :body)]
+                                               (when-not (nil? body)
+                                                 (js/JSON.stringify (clj->js (get options :body)))))
+                                       :headers (merge {"Content-Type" "application/json"}
+                                                       (get options :headers))}))
+               (.then (fn [resp]
+                        (.json resp)))
+               (.then (fn [resp]
+                        (let [resp (keywordize-keys (js->clj resp))]
+                          (rf/dispatch [:set-api {(get options :dispatch) {:status status/success
+                                                                           :data (get resp :data)}}]))))
+               (.catch (fn [err]
+                         (let [err (keywordize-keys (js->clj err))]
+                           (rf/dispatch [:set-api {(get options :dispatch) {:status status/failure
+                                                                            :message (get err :message)}}]))))))
+         (do
+           (set! (.-innerText (.getElementById js/document "mount")) "")
+           (let [fetched-data (.-innerText (.getElementById js/document "data"))]
+             (prn "A")
+             (rf/dispatch [:set-api {(get options :dispatch) {:status status/success
+                                                              :data (cljs.reader/read-string fetched-data)}}])))))))

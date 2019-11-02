@@ -6,8 +6,8 @@
 
 ; html template
 ; -------------------------------
-(defn loading-page [initial-page & [params]]
-  (let [data (initial-page params)]
+(defn loading-page [& [initial-page params]]
+  (let [data (when-not (nil? initial-page) (initial-page params))]
     (html
      [:html
       [:head

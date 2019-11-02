@@ -16,4 +16,4 @@
   (resources "/")
   (resources "/about")
   (resources "/about/:id")
-  (not-found "Not Found"))
+  (not-found (loading-page)))

@@ -16,6 +16,8 @@
                  [prone "0.8.2"]
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.4.0"]
+                 [re-frame "0.10.5"]
+                 [day8.re-frame/re-frame-10x "0.4.1"]
                  [hiccup "1.0.5"]
                  [environ "1.0.1"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
@@ -60,6 +62,10 @@
                                         :asset-path   "js/out"
                                         :optimizations :none
                                         :process-shim true
+                                        :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true
+                                                          "day8.re_frame.tracing.trace_enabled_QMARK_" true}
+                                        :preloads [devtools.preload
+                                                   day8.re-frame-10x.preload]
                                         :foreign-libs [{:file "resources/public/js/npm-deps.js"}]
                                                         ; :provides ["moment"] ; example
                                                         ; :global-exports {moment Moment}}] ; [momen Moment] ; name-to-export name-from-npm-deps
@@ -69,9 +75,11 @@
 
                    :dependencies [[ring/ring-mock "0.3.0"]
                                   [ring/ring-devel "1.4.0"]
+                                  [binaryage/devtools "0.9.10"]
                                   [lein-figwheel "0.5.19"]
                                   [figwheel-sidecar "0.5.19"]
                                   [org.clojure/tools.nrepl "0.2.12"]
+                                  [day8.re-frame/tracing-stubs "0.5.1"]
                                   [com.cemerick/piggieback "0.1.5"]
                                   [pjstadig/humane-test-output "0.7.0"]]
 
