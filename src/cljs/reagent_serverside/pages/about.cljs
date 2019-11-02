@@ -6,11 +6,11 @@
    [reagent-serverside.utils.fetch :refer [fetch]]
    [reagent-serverside.about :as about]))
 
-(defn about-page []
+(defn about-page [params]
   (r/create-class
    {:component-did-mount
     (fn []
-      (about/initial-data))
+      (about/initial-data params))
     :reagent-render
     (fn [params]
       (let [api-data (-> @(rf/subscribe [:api]) :about-data)] 

@@ -16,10 +16,7 @@
   (when js/goog.DEBUG
     (accountant/dispatch-current!))
   (r/create-class
-   {:component-did-mount
-    (fn []
-      (rf/dispatch [:initialize]))
-    :reagent-render
+   {:reagent-render
     (fn []
       [(@selected-page :page) (@selected-page :params)])}))
 
