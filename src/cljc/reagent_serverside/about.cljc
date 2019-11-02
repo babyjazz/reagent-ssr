@@ -8,4 +8,4 @@
         ;   :headers {"authorization" "bearer sdfjsdfj"}
           :body {:id (or (get params :char)
                          (or (get params :num) 3))}
-          :dispatch :my-id}))
+          :dispatch :about-data}))
