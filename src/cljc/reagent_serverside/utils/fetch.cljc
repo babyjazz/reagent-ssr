@@ -53,6 +53,5 @@
          (do
            (set! (.-innerText (.getElementById js/document "mount")) "")
            (let [fetched-data (.-innerText (.getElementById js/document "data"))]
-             (prn "A")
              (rf/dispatch [:set-api {(get options :dispatch) {:status status/success
                                                               :data (cljs.reader/read-string fetched-data)}}])))))))
